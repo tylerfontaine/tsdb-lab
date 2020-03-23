@@ -17,6 +17,6 @@ pgadmin4 is available on `localhost:80`
 
 Postgres default username and password: `postgres` `password`  
 Grafana default username and password: `admin` `admin`  
-pgadmin4 default email and password: `support@timescale.com` `password`  
+pgadmin4 default email and password: `email@example.com` `password`  
 
 This is obviously not secure, and is for lab use only.
