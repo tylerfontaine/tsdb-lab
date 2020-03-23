@@ -1,0 +1,44 @@
+version: "3.7"
+
+services:
+  db:
+    container_name: tsdb
+    image: "timescale/timescaledb-postgis:latest-pg11"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+    ports:
+      - "5432:5432"
+    volumes:
+      - timescaletest:/var/lib/postgres/data
+    networks:
+      - compose
+  grafana:
+    container_name: grafana
+    image: "grafana/grafana"
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+    networks:
+      - compose
+    volumes:
+      - timescaletest:/usr/local/var/lib/grafana
+  pgadmin:
+    container_name: pgadmin
+    image: "dpage/pgadmin4"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: email@example.com
+      PGADMIN_DEFAULT_PASSWORD: password
+    ports:
+      - "80:80"
+    depends_on:
+      - db
+    networks:
+      - compose
+
+volumes:
+  timescaletest:
+networks:
+  compose:
+    name: compose-test
